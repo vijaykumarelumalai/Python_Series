@@ -1,0 +1,51 @@
+import tkinter as tk
+
+class TrafficLightApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Manual Traffic Light Control")
+        self.root.geometry("200x400")
+        
+        # Create a canvas for drawing the traffic light
+        self.canvas = tk.Canvas(root, width=150, height=350, bg='black')
+        self.canvas.pack(pady=20)
+        
+        # Draw circles for red, yellow, and green lights
+        self.red_light = self.canvas.create_oval(50, 20, 100, 70, fill="grey")
+        self.yellow_light = self.canvas.create_oval(50, 100, 100, 150, fill="grey")
+        self.green_light = self.canvas.create_oval(50, 180, 100, 230, fill="grey")
+        
+        # Create buttons to manually control the traffic light
+        self.red_button = tk.Button(root, text="Red", command=self.turn_red, width=10, bg="red")
+        self.red_button.pack(pady=10)
+        
+        self.yellow_button = tk.Button(root, text="Yellow", command=self.turn_yellow, width=10, bg="yellow")
+        self.yellow_button.pack(pady=10)
+        
+        self.green_button = tk.Button(root, text="Green", command=self.turn_green, width=10, bg="green")
+        self.green_button.pack(pady=10)
+
+    # Function to turn the red light on
+    def turn_red(self):
+        self.canvas.itemconfig(self.red_light, fill="red")
+        self.canvas.itemconfig(self.yellow_light, fill="grey")
+        self.canvas.itemconfig(self.green_light, fill="grey")
+
+    # Function to turn the yellow light on
+    def turn_yellow(self):
+        self.canvas.itemconfig(self.red_light, fill="grey")
+        self.canvas.itemconfig(self.yellow_light, fill="yellow")
+        self.canvas.itemconfig(self.green_light, fill="grey")
+
+    # Function to turn the green light on
+    def turn_green(self):
+        self.canvas.itemconfig(self.red_light, fill="grey")
+        self.canvas.itemconfig(self.yellow_light, fill="grey")
+        self.canvas.itemconfig(self.green_light, fill="green")
+
+# Create the main window
+root = tk.Tk()
+app = TrafficLightApp(root)
+
+# Run the application
+root.mainloop()
